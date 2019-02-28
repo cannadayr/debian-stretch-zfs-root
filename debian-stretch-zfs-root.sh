@@ -265,7 +265,7 @@ chroot /target /usr/sbin/locale-gen
 
 chroot /target /usr/bin/apt-get update
 
-chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG zfs-initramfs zfs-dkms
+chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG zfs-initramfs zfs-dkms firmware-iwlwifi
 grep -q zfs /target/etc/default/grub || perl -i -pe 's/quiet/boot=zfs quiet/' /target/etc/default/grub 
 chroot /target /usr/sbin/update-grub
 
