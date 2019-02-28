@@ -229,7 +229,10 @@ mkswap -f /dev/zvol/$ZPOOL/swap
 zpool status
 zfs list
 
-debootstrap --include=openssh-server,locales,linux-headers-amd64,linux-image-amd64,joe,rsync,sharutils,psmisc,htop,patch,less --components main,contrib,non-free $TARGETDIST /target http://deb.debian.org/debian/
+while true
+do
+	debootstrap --include=openssh-server,locales,linux-headers-amd64,linux-image-amd64,joe,rsync,sharutils,psmisc,htop,patch,less --components main,contrib,non-free $TARGETDIST /target http://deb.debian.org/debian/ && break
+done
 
 NEWHOST=debian-$(hostid)
 echo "$NEWHOST" >/target/etc/hostname
