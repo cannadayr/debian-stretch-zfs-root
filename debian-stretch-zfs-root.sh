@@ -116,20 +116,21 @@ case "$RAIDLEVEL" in
   	;;
 esac
 
-GRUBPKG=grub-pc
-if [ -d /sys/firmware/efi ]; then
-	whiptail --backtitle "$0" --title "EFI boot" --separate-output \
-		--menu "\nYour hardware supports EFI. Which boot method should be used in the new to be installed system?\n" 20 74 8 \
-		"EFI" "Extensible Firmware Interface boot" \
-		"BIOS" "Legacy BIOS boot" 2>"$TMPFILE"
-
-	if [ $? -ne 0 ]; then
-		exit 1
-	fi
-	if grep -qi EFI $TMPFILE; then
-		GRUBPKG=grub-efi-amd64
-	fi
-fi
+#GRUBPKG=grub-pc
+GRUBPKG=grub-efi-amd64
+#if [ -d /sys/firmware/efi ]; then
+#	whiptail --backtitle "$0" --title "EFI boot" --separate-output \
+#		--menu "\nYour hardware supports EFI. Which boot method should be used in the new to be installed system?\n" 20 74 8 \
+#		"EFI" "Extensible Firmware Interface boot" \
+#		"BIOS" "Legacy BIOS boot" 2>"$TMPFILE"
+#
+#	if [ $? -ne 0 ]; then
+#		exit 1
+#	fi
+#	if grep -qi EFI $TMPFILE; then
+#		GRUBPKG=grub-efi-amd64
+#	fi
+#fi
 
 whiptail --backtitle "$0" --title "Confirmation" \
 	--yesno "\nAre you sure to destroy ZFS pool '$ZPOOL' (if existing), wipe all data of disks '${DISKS[*]}' and create a RAID '$RAIDLEVEL'?\n" 20 74
