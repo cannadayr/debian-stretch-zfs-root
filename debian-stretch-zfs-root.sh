@@ -183,10 +183,14 @@ for DISK in "${DISKS[@]}"; do
 	echo -e "\nPartitioning disk $DISK"
 
 	sgdisk --zap-all $DISK
+	sgdisk --zap-all $DISK
 
-	sgdisk -a1 -n$PARTBIOS:34:2047   -t$PARTBIOS:EF02 \
-	           -n$PARTEFI:2048:+512M -t$PARTEFI:EF00 \
-                   -n$PARTZFS:0:0        -t$PARTZFS:BF01 $DISK
+    sgdisk -a1 -n$PARTBIOS:34:2047   -t$PARTBIOS:EF02 \
+        -n$PARTEFI:2048:+512M        -t$PARTEFI:EF00 \
+        -n3:0:+16G                   -t3:8200 \
+        -n4:0:0                      -t4:BF01 $DISK
+    # separate into two steps so we can align the root zfs pool
+
 done
 
 sleep 2
