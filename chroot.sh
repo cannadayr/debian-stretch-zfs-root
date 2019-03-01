@@ -193,7 +193,7 @@ chroot /target /bin/sh -c "cd /opt/zfs && for file in *.deb; do gdebi -q --non-i
 grep -q zfs /target/etc/default/grub || perl -i -pe 's/quiet/boot=zfs quiet/' /target/etc/default/grub 
 chroot /target /usr/sbin/update-grub
 
-if [ "${GRUBPKG:0:8}" == "grub-efi" ]; then
+#if [ "${GRUBPKG:0:8}" == "grub-efi" ]; then
 
 	# "This is arguably a mis-design in the UEFI specification - the ESP is a single point of failure on one disk."
 	# https://wiki.debian.org/UEFI#RAID_for_the_EFI_System_Partition
@@ -210,7 +210,7 @@ if [ "${GRUBPKG:0:8}" == "grub-efi" ]; then
 		echo "${EFIBAKPART}PARTUUID=$(blkid -s PARTUUID -o value $EFIPARTITION) /boot/efi vfat defaults 0 1" >> /target/etc/fstab
 		((I++)) || true
 	done
-fi
+#fi
 
 if [ -d /proc/acpi ]; then
 	chroot /target /usr/bin/apt-get install --yes acpi acpid
