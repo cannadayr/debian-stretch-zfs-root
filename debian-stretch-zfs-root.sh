@@ -24,16 +24,19 @@
 # with this program. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 #
 
+# use local squid proxy
+export http_proxy=http://127.0.0.1:8000
+
 ### Static settings
 
-ZPOOL=rpool
+ZPOOL=rpool-vega
 TARGETDIST=stretch
 
 PARTBIOS=1
 PARTEFI=2
-PARTZFS=3
+PARTZFS=4
 
-SIZESWAP=2G
+SIZESWAP=16G
 SIZETMP=3G
 SIZEVARTMP=3G
 
