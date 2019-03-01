@@ -146,7 +146,8 @@ if [ "$(hostid | cut -b-6)" == "007f01" ]; then
 	dd if=/dev/urandom of=/etc/hostid bs=1 count=4
 fi
 
-DEBRELEASE=$(head -n1 /etc/debian_version)
+#DEBRELEASE=$(head -n1 /etc/debian_version)
+DEBRELEASE=9
 case $DEBRELEASE in
 	8*)
 		echo "deb http://http.debian.net/debian/ jessie-backports main contrib non-free" >/etc/apt/sources.list.d/jessie-backports.list
