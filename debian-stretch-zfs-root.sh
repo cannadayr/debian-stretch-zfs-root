@@ -213,10 +213,11 @@ zfs set compression=lz4 $ZPOOL
 #zfs set acltype=posixacl $ZPOOL
 
 zfs create $ZPOOL/ROOT
-zfs create -o mountpoint=/ $ZPOOL/ROOT/debian-$TARGETDIST
-zpool set bootfs=$ZPOOL/ROOT/debian-$TARGETDIST $ZPOOL
+zfs create -o mountpoint=/ $ZPOOL/ROOT/debian
+zpool set bootfs=$ZPOOL/ROOT/debian $ZPOOL
 
-zfs create -o mountpoint=/tmp -o setuid=off -o exec=off -o devices=off -o com.sun:auto-snapshot=false -o quota=$SIZETMP $ZPOOL/tmp
+# TODO turn off exec for /tmp & turn off devices
+zfs create -o mountpoint=/tmp -o setuid=off -o exec=on -o devices=on -o com.sun:auto-snapshot=false -o quota=$SIZETMP $ZPOOL/tmp
 chmod 1777 /target/tmp
 
 # /var needs to be mounted via fstab, the ZFS mount script runs too late during boot
