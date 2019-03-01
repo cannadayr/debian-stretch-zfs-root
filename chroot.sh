@@ -175,14 +175,14 @@ chroot /target /usr/sbin/locale-gen
 
 chroot /target /usr/bin/apt-get update
 
-#chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG zfs-initramfs zfs-dkms
-chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG
-
 chroot /target /usr/bin/apt-get install -y build-essential autoconf libtool gawk alien fakeroot \
-                                            zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev \
+                                            zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux1-dev \
                                             libudev-dev parted lsscsi ksh libssl-dev libelf-dev \
                                             git gdebi-core python3-dev python3-setuptools python3-cffi \
                                             dkms firmware-iwlwifi
+
+#chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG zfs-initramfs zfs-dkms
+chroot /target /usr/bin/apt-get install --yes grub2-common $GRUBPKG
 
 chroot /target /bin/sh -c "cd /opt && git clone --depth=1 https://github.com/zfsonlinux/zfs"
 chroot /target /bin/sh -c "cd /opt/zfs && sh autogen.sh"
